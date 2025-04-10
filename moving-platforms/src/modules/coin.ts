@@ -22,8 +22,8 @@ export function createCoin(model: string, position: Vector3, size: Vector3, cent
     [{ type: 'box' }],
     () => {
       Transform.getMutable(coinPickupSound).position = Transform.get(engine.PlayerEntity).position
-      AudioSource.getMutable(coinPickupSound).playing = true
-      engine.removeEntity(entity)
+      AudioSource.playSound(coinPickupSound, 'sounds/coinPickup.mp3')
+      engine.removeEntityWithChildren(entity)
     },
     Color3.Yellow()
   )

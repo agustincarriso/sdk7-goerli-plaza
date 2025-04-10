@@ -9,7 +9,7 @@ import * as utils from '@dcl-sdk/utils'
 
 const projectPath = "reward-claim"
 const description = "Claim a wearable by clicking on the dispenser. You must be connected with your wallet to the Sepolia network. After submitting a captcha the wearable will arrive over the next couple of minutes."
-const Max_Chars = 45
+
 
 
 const uiComponent = () => (
@@ -67,7 +67,7 @@ function GitHubLinkUi() {
 
 function descriptionUI() {
 
-  const multiLineDescription = breakLines(description, Max_Chars)
+
 
   return <UiEntity
     uiTransform={{
@@ -98,7 +98,7 @@ function descriptionUI() {
       uiBackground={{ color: Color4.fromHexString("#92b096") }}
     >
       <Label
-        value={multiLineDescription}
+        value={description}
         fontSize={18}
         textAlign="middle-center"
 
@@ -115,86 +115,26 @@ function descriptionUI() {
 }
 
 
-export function breakLines(text: string, linelength: number) {
-  const lineBreak = '\n'
-  var counter = 0
-  var line = ''
-  var returnText = ''
-  var bMatchFound = false
-  const lineLen = linelength ? linelength : 50
-
-
-  if (!text) return ''
-  if (text.length < lineLen + 1) { return text }
-
-  while (counter < text.length) {
-    line = text.substring(counter, counter + lineLen);
-    bMatchFound = false
-    if (line.length == lineLen) {
-      for (var i = line.length; i > -1; i--) {
-        if (line[i] == ' ' || line[i] == '-' || line[i] == '_' || line[i] == '.' || line[i] == '/') {
-          counter += line.substring(0, i).length
-          line = line.substring(0, i) + lineBreak
-          returnText += line
-          bMatchFound = true
-          break
-        }
-      }
-
-      if (!bMatchFound) {
-        counter += line.length
-        line = line + lineBreak
-        returnText += line
-      }
-    }
-    else {
-      returnText += line
-      break // We're breaking out of the the while(), not the for()
-    }
-  }
-
-  return returnText
-}
-
 
 export function confirmationUI(thumbnail: string, wearableName: string) {
 
   const customPrompt = ui.createComponent(ui.CustomPrompt, {
     style: ui.PromptStyles.DARK,
-    height: 300,
   })
 
 
   const promptTitle = customPrompt.addText({
     value: 'Wearable incoming!',
-    xPosition: 0,
-    yPosition: 135,
     color: Color4.Green(),
     size: 30,
   })
 
   const promptText = customPrompt.addText({
     value: "It will arrive in your backpack in a few minutes.",
-    xPosition: 0,
-    yPosition: 100,
-  })
-
-
-  const promptButtonE = customPrompt.addButton({
-    style: ui.ButtonStyles.E,
-    text: 'Ok',
-    xPosition: 0,
-    yPosition: -120,
-    onMouseDown: () => {
-      console.log('Yeah clicked')
-      customPrompt.hide()
-    },
   })
 
   const promptIcon = customPrompt.addIcon({
     image: thumbnail,
-    xPosition: 0,
-    yPosition: 5,
     height: 125,
     width: 125
   })
@@ -202,9 +142,16 @@ export function confirmationUI(thumbnail: string, wearableName: string) {
 
   const name = customPrompt.addText({
     value: wearableName,
-    xPosition: 0,
-    yPosition: -70,
     size: 20,
+  })
+
+  const promptButtonE = customPrompt.addButton({
+    style: ui.ButtonStyles.E,
+    text: 'Ok',
+    onMouseDown: () => {
+      console.log('Yeah clicked')
+      customPrompt.hide()
+    },
   })
 
   customPrompt.show()
@@ -225,7 +172,6 @@ export function alreadyClaimedUI() {
     useDarkTheme: true,
     textSize: 20,
     width: 450,
-    height: 300,
     startHidden: false,
   })
 }
@@ -243,8 +189,6 @@ export function errorUI(errorString: string) {
     acceptLabel: 'Ok',
     useDarkTheme: true,
     textSize: 20,
-    width: 450,
-    height: 300,
     startHidden: false,
   })
   throw new Error(errorString)
@@ -257,7 +201,6 @@ export function captchaUI(image: string, id: string, campaign: ClaimConfigInstTy
 
   const customPrompt = ui.createComponent(ui.CustomPrompt, {
     style: ui.PromptStyles.DARK,
-    height: 300,
   })
 
 
@@ -269,23 +212,8 @@ export function captchaUI(image: string, id: string, campaign: ClaimConfigInstTy
     size: 30,
   })
 
-
-  const promptButtonE = customPrompt.addButton({
-    style: ui.ButtonStyles.E,
-    text: 'Ok',
-    xPosition: 0,
-    yPosition: -120,
-    onMouseDown: () => {
-      validateCaptcha(captchaText, id, campaign, campaign_key)
-      customPrompt.hide()
-
-    },
-  })
-
   const promptIcon = customPrompt.addIcon({
     image: image,
-    xPosition: 0,
-    yPosition: 5,
     height: 125,
     width: 125
   })
@@ -293,8 +221,16 @@ export function captchaUI(image: string, id: string, campaign: ClaimConfigInstTy
 
   const name = customPrompt.addTextBox({
     onChange: (text) => { captchaText = text },
-    xPosition: 0,
-    yPosition: -70,
+  })
+
+  const promptButtonE = customPrompt.addButton({
+    style: ui.ButtonStyles.E,
+    text: 'Ok',
+    onMouseDown: () => {
+      validateCaptcha(captchaText, id, campaign, campaign_key)
+      customPrompt.hide()
+
+    },
   })
 
   customPrompt.show()

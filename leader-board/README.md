@@ -7,13 +7,10 @@ This is a simple scene that implements a leader board. It includes a basic game 
 This scene shows you:
 
 - How to send HTTP requests to an API to store data in a permanent place, so others can then retrieve changes
-- How to set up a server on Firebase that uses the Firestore database
 - How to parse a JSON response from an API call
 - How to arrange text fields into an in-world table
 - How to parse a string so that it fits a maximum line length and maximum number of lines
 - How to fetch the player's UserId
-
-The server implementation uses [Google Firebase](https://firebase.google.com/). See [this tutorial](https://decentraland.org/blog/tutorials/servers-part-2/) for setting up the server in a similar use case. You could also store the scores somewhere else, like an Amazon S3 server, or any other storage provider.
 
 Bare in mind that this implementation doesn't implement any measures to counter cheating. Since new scores are added to the server via RESTful HTTP calls, these could be easily replicated with fake values.
 
@@ -22,9 +19,15 @@ Bare in mind that this implementation doesn't implement any measures to counter 
 
 **Previewing the scene**
 
-1. Download this full repository from [sdk7-goerli-plaza](https://github.com/decentraland/sdk7-goerli-plaza/tree/main), including this and several other example scenes on SDK7.
+1. Download this repository.
 
-2. Install the [Decentraland Editor](https://docs.decentraland.org/creator/development-guide/sdk7/editor/)
+2. Open the command line and navigate to this scene root directory
+
+3. Run:
+
+```
+npm install
+```
 
 3. Open a Visual Studio Code window on `scene` directory. Not on the root folder of the whole repo, but instead on this sub-folder that belongs to the scene.
 
@@ -35,10 +38,6 @@ Alternatively, you can use the command line. Inside `scene` directory run:
 ```
 npm run start
 ```
-
-**Setting up the server**
-
-The scene is set up to make use of an existing server. To launch your own server, we recommend you deploy what's in the `server` folder to your own Firebase account, following the steps in [this tutorial](https://decentraland.org/blog/tutorials/servers-part-2/).
 
 **Scene Usage**
 

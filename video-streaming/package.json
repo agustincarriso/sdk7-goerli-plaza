@@ -6,6 +6,9 @@
     "@dcl/js-runtime": "latest",
     "@dcl/sdk": "latest"
   },
+  "devDependencies": {
+    "@dcl/asset-packs": "latest"
+  },
   "scripts": {
     "build": "sdk-commands build --skip-install",
     "deploy": "sdk-commands deploy",

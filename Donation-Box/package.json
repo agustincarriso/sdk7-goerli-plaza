@@ -1,0 +1,23 @@
+{
+  "name": "Donation-Box",
+  "description": "This scene includes a donation box to send MANA to the owner's address. It plays a little animation when a donation is made.",
+  "version": "1.0.0",
+  "dependencies": {
+    "eth-connect": "latest"
+  },
+  "devDependencies": {
+    "@dcl-sdk/utils": "latest",
+    "@dcl/asset-packs": "latest",
+    "@dcl/js-runtime": "latest",
+    "@dcl/sdk": "latest",
+    "dcl-crypto-toolkit": "latest",
+    "dcl-ui-toolkit": "latest"
+  },
+  "scripts": {
+    "build": "sdk-commands build",
+    "deploy": "sdk-commands deploy",
+    "start": "sdk-commands start",
+    "upgrade-sdk": "npm install --save-dev @dcl/sdk@latest",
+    "upgrade-sdk:next": "npm install --save-dev @dcl/sdk@next"
+  }
+}

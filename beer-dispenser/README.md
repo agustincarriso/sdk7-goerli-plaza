@@ -10,8 +10,6 @@ _demo of beer-dispenser scene running in preview._
 
 A beer dispenser that uses P2P messaging so that you can pour beer for yourself and friends.
 
-> IMPORTANT: In this version with SDK7 the P2P is not working yet, and
-
 ## Instructions
 
 Pick up and put down the beer glass using the <kbd>E</kbd> key - you will only be able to place the beer glass on a flat surface that's pointing upwards. To fill a glass, place it at one of the bases on the dispenser and then press on the corresponding tap using the the <kbd>E</kbd> key again; to drink the beer just press the <kbd>F</kbd> key. Use your mouse to look around and <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> keys on your keyboard to move forward, left, backward and right respectively. Finally, pressing the <kbd>Space</kbd> key will make your avatar jump.
@@ -25,18 +23,16 @@ _Note: If you open separate tabs in the same window, the interaction won’t wor
 **Previewing the scene**
 
 1. Download this full repository from [sdk7-goerli-plaza](https://github.com/decentraland/sdk7-goerli-plaza/tree/main), including this and several other example scenes on SDK7.
+1. Download this repository.
 
-2. Install the [Decentraland Editor](https://docs.decentraland.org/creator/development-guide/sdk7/editor/)
+2. Open the command line and navigate to this scene root directory
 
-3. Open a Visual Studio Code window on this scene's root folder. Not on the root folder of the whole repo, but instead on this sub-folder that belongs to the scene.
-
-4. Open the Decentraland Editor tab, and press **Run Scene**
-
-Alternatively, you can use the command line. Inside this scene root directory run:
+3. Run:
 
 ```
-npm run start
+npm install
 ```
+
 
 ## Acknowledgements
 

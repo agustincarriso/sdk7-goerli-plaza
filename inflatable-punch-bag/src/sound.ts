@@ -1,25 +1,17 @@
-import { AudioSource, AvatarAnchorPointType, AvatarAttach, engine } from '@dcl/sdk/ecs'
+import { AudioSource, AvatarAnchorPointType, AvatarAttach, engine, Transform } from '@dcl/sdk/ecs'
 
 //Create audio entity to play sound
 const punch = engine.addEntity()
 
 //Create audio source component
 AudioSource.create(punch, {
-  audioClipUrl: 'sounds/punch.mp3',
-  loop: false,
-  playing: false,
-  volume: 1
+  audioClipUrl: 'sounds/punch.mp3'
 })
 
 // Attach to local player position
-AvatarAttach.create(punch, {
-  anchorPointId: AvatarAnchorPointType.AAPT_POSITION
-})
+Transform.getOrCreateMutable(punch).parent = engine.PlayerEntity
 
 //Create a function to play punch sound
 export function playpunchSound() {
-  //Fetch mutable version of audio source component
-  const audioSource = AudioSource.getMutable(punch)
-  //Play the sound
-  audioSource.playing = true
+  AudioSource.playSound(punch, 'sounds/punch.mp3')
 }

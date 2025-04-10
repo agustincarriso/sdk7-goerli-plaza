@@ -2,7 +2,7 @@ import { getRealm } from '~system/Runtime'
 import { signedFetch } from '~system/SignedFetch'
 // import { GAME_STATE } from "../gameData"
 import { ClaimConfig, ClaimConfigInstType, USE_CAPTCHA } from './claimConfig'
-import { confirmationUI, alreadyClaimedUI, errorUI, breakLines, captchaUI } from './ui'
+import { confirmationUI, alreadyClaimedUI, errorUI, captchaUI } from './ui'
 import * as utils from '@dcl-sdk/utils'
 import { getPlayer } from '@dcl/sdk/players'
 
@@ -42,7 +42,7 @@ export async function claimToken(campaign: ClaimConfigInstType, campaign_key: st
   await setUserData()
 
   if (USE_CAPTCHA) {
-    const request = await fetch(`https://rewards.decentraland.org/api/captcha`, { method: 'POST' })
+    const request = await fetch(ClaimConfig.rewardsServer + `/api/captcha`, { method: 'POST' })
     const captcha = await request.json()
     console.log('CAPTCHA DATA: ', captcha)
     captchaUI(captcha.data.image, captcha.data.id, campaign, campaign_key)
@@ -96,7 +96,7 @@ async function processResponse(response: any, campaign_key: string) {
 
   if (json.ok === false) {
     console.log('ERROR:' + json.error)
-    errorUI(json.error ? breakLines(json.error, 20) : 'Invalid response')
+    errorUI(json.error ? json.error : 'Invalid response')
   }
 
   alreadyClaimed.push(campaign_key)
@@ -122,7 +122,7 @@ export async function validateCaptcha(
   }
 
   const response = await signedFetch({
-    url: 'https://rewards.decentraland.org/api/rewards',
+    url: ClaimConfig.rewardsServer + '/api/rewards',
     init: {
       method: 'POST',
       headers: {
@@ -146,7 +146,7 @@ export async function validateCaptcha(
 
   if (json.ok === false) {
     console.log('ERROR:' + json.error)
-    errorUI(json.error ? breakLines(json.error, 20) : 'Invalid response')
+    errorUI(json.error ? json.error : 'Invalid response')
     return false
   }
 
